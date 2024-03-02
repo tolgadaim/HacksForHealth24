@@ -83,6 +83,8 @@ button {
 
 button:hover {
     background-color: #45a049;
+    transform: scale(1.05); /* Scale on hover */
+
 }
 
 #loading {
@@ -146,6 +148,7 @@ button:hover {
 
         button {
             font-size: 14px;
+            
         }
     }
 
@@ -198,6 +201,7 @@ button:hover {
 
 .howToUseButton:hover {
     background-color: #45a049; /* Darker green on hover */
+    transform: scale(1.05); /* Scale on hover */
 }
 .poweredByGoogle {
     margin-top: 25px;
