@@ -1,16 +1,20 @@
 :root {
-    --primary-color: #f0f0f0;
+    --color-primary: #f0f0f0;
+    --color-container: #d8d8d8;
+
+    --color-text: #303030;
 }
 
 body {
     margin: 0;
     padding: 0;
-    background-color: var(--primary-color);
+    background-color: var(--color-primary);
 }
 
 .content {
-    margin: 0;
-    padding: 0;
+    background-color: #abc4ed;
+    border-inline: 6px solid #4287f5;
+    margin-inline: 20vw;
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -18,14 +22,13 @@ body {
     justify-content: center;
     text-align: center;
     height: 100%;
-    width: 100%;
+    width: 60vw;
     font-family: 'Helvetica', sans-serif;
 }
 
 h1 {
     text-align: center;
-    color: #333;
-    margin-top: 50px;
+    color: var(--color-text);
 }
 
 #upload-form {
@@ -47,7 +50,7 @@ h1 {
     }
 
     #uploadContainer {
-        background-color: #d4d4d4;
+        background-color: var(--color-container);
         img {
             height: 50%;
         }
@@ -63,14 +66,6 @@ h1 {
         p {
             margin-bottom: 10px;
         }
-    }
-
-    #image-upload {
-        font-size: 16px;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        margin-bottom: 10px;
     }
     
     button {
@@ -93,7 +88,7 @@ h1 {
 #result {
     margin-top: 20px;
     text-align: center;
-    color: #333;
+    color: var(--color-text);
     font-size: 18px;
 }
 

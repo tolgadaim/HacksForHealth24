@@ -35,6 +35,8 @@ function detectMedicine() {
             return;
         }
 
+        // postData("dog");
+
         // Perform image detection or processing here
         // You can use JavaScript, a server-side language, or an API for this purpose
 
@@ -42,3 +44,12 @@ function detectMedicine() {
         document.getElementById('result').innerHTML = 'Medicine detected: Aspirin';
     });
 }
+
+// function postData(input) {
+//   $.ajax({
+//       type: "POST",
+//       url: "gemini.py",
+//       data: { param: input },
+//       success: callbackFunc
+//   });
+// }
