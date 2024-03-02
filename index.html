@@ -1,53 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Medicine Detection</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-
-        #upload-form {
-            text-align: center;
-            margin-top: 50px;
-        }
-
-        #result {
-            margin-top: 20px;
-            text-align: center;
-        }
-    </style>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/script.js"></script>
 </head>
-
 <body>
-    <h1>Medicine Detection</h1>
+    <div class="content">
+        <h1>Medicine Detection</h1>
 
-    <form id="upload-form" action="#" method="post" enctype="multipart/form-data">
-        <label for="image-upload">Upload an image:</label>
-        <input type="file" id="image-upload" name="image" accept="image/*" required>
-        <br>
-        <button type="submit">Detect Medicine</button>
-    </form>
+        <form id="upload-form" action="#" method="post" enctype="multipart/form-data">
+            <input type="file" id="image-upload" name="image" accept="image/*" style="display: none;" onchange="displayFileName(this)">
+            <label for="image-upload" id="upload-label">
+                <div id="uploadContainer">
+                    <img src="https://conjointly.com/img/upload-file.png" alt="Upload Image">
+                    <p>Upload an image</p>
+                </div>
+                <div id="imageContainer" style="display: none;">
+                    <p id="imageText">Uploaded Image:</p>
+                    <img id="selectedImage" src="" width="300px" alt="Uploaded Image">
+                </div>
+            </label>
+            
+            <button type="submit" onclick="detectMedicine()">Detect Medicine</button>
+        </form>
 
-    <div id="result">
-        <!-- The result will be displayed here -->
+        <div id="result">
+            <!-- The result will be displayed here -->
+        </div>
     </div>
-
-    <script>
-        document.getElementById('upload-form').addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            // Perform image detection or processing here
-            // You can use JavaScript, a server-side language, or an API for this purpose
-
-            // For now, just displaying a placeholder result
-            document.getElementById('result').innerHTML = '<p>Medicine detected: Aspirin</p>';
-        });
-    </script>
 </body>
-
 </html>
