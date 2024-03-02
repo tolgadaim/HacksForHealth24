@@ -1,6 +1,4 @@
 window.addEventListener('load', function () {
-    runGemini("Tell me a joke");
-
     document.getElementById('image-upload').addEventListener('change', function(event) {
         var selectedFile = event.target.files[0];
         var imageContainer = document.getElementById('imageContainer');
@@ -54,7 +52,7 @@ async function detectMedicine() {
 
         // If image is empty, return
         if (document.getElementById('selectedImage').getAttribute('src') == '') {
-            document.getElementById('result').innerHTML = 'No image selected';
+            // document.getElementById('result').innerHTML = 'No image selected';
             return;
         }
 
@@ -62,19 +60,23 @@ async function detectMedicine() {
         // You can use JavaScript, a server-side language, or an API for this purpose
 
         // Ask gemini the text:
+        var loadingScreen = document.getElementById('loading');
+        loadingScreen.style.display = 'flex';
         try {
             const result = await runGemini("What is the general information of aspirin?");
+            loadingScreen.style.display = 'none';
             if (result != null) {
                 var resultContainer = document.getElementById('result');
                 var paragraph = resultContainer.querySelector('p');
                 
                 var resultWithBreaks = result.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
                 resultWithBreaks = resultWithBreaks.replace(/\*\s/g, '&#8226; ');
-                resultContainer.style.display = 'flex';
                 paragraph.innerHTML = resultWithBreaks;
+                resultContainer.style.display = 'flex';
             }
         } catch (error) {
             console.error(error);
+            loadingScreen.style.display = 'none';
             // Handle errors here
         }
     });

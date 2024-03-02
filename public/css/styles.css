@@ -36,6 +36,7 @@ h1 {
     margin-top: 20px;
 
     div {
+        margin-bottom: 30px;
         width: 300px;
         height: 300px;
         border-radius: 25px;
@@ -58,7 +59,6 @@ h1 {
     }
 
     #imageContainer {
-        margin-top: 40px;
         img {
             object-fit: cover;
             width: 100%;
@@ -71,7 +71,6 @@ h1 {
 }
 
 button {
-    margin-top: 25px;
     background-color: #4CAF50;
     color: white;
     padding: 10px 20px;
@@ -84,6 +83,33 @@ button {
 
 button:hover {
     background-color: #45a049;
+}
+
+#loading {
+    display: none;
+    position: fixed;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    align-items: center;
+    justify-content: center;
+    opacity: 50%;
+
+    img {
+        width: 100px;
+        height: 100px;
+        animation: rotate 3s linear infinite;
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 #result {
@@ -138,7 +164,7 @@ button:hover {
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 1px 1000px rgba(0, 0, 0, 0.5);
     z-index: 1000;
     max-width: 400px;
     text-align: center;
@@ -160,7 +186,6 @@ button:hover {
     font-weight: bold;
 }
 .howToUseButton {
-    margin-top: 25px;
     background-color: #4CAF50;
     color: white;
     padding: 10px 20px;
@@ -176,7 +201,7 @@ button:hover {
 }
 .poweredByGoogle {
     margin-top: 25px;
-    background-color: #4CAF50;
+    background-color: #4c7faf;
     color: white;
     padding: 10px 20px;
     border: none;
