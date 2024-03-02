@@ -27,8 +27,29 @@ window.addEventListener('load', function () {
       });
 });
 
-function detectMedicine() {
-    document.getElementById('upload-form').addEventListener('submit', function (e) {
+function returnToPage() {
+    var resultContainer = document.getElementById('result');
+    resultContainer.style.display = 'none';
+}
+
+async function runGemini(prompt) {
+    try {
+        const response = await $.ajax({
+            url: '/runGemini',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ prompt: prompt })
+        });
+        console.log(response); // Handle the response from the server
+        return response;
+    } catch (error) {
+        console.error(error); // Handle any errors
+        throw error; // Rethrow the error for the caller to handle
+    }
+}
+
+async function detectMedicine() {
+    document.getElementById('upload-form').addEventListener('submit', async function (e) {
         e.preventDefault();
 
         // If image is empty, return
@@ -39,29 +60,22 @@ function detectMedicine() {
 
         // Perform image detection or processing here
         // You can use JavaScript, a server-side language, or an API for this purpose
-        
 
         // Ask gemini the text:
-        result = runGemini("What is the general information of aspirin?");
-
-        // For now, just displaying a placeholder result
-        document.getElementById('result').innerHTML = 'Medicine detected: Aspirin';
-    });
-}
-
-function runGemini(prompt) {
-    // Send an AJAX request to the server to execute the runGemini function
-    $.ajax({
-        url: '/runGemini',
-        method: 'POST',
-        contentType: 'application/json', // Set content type to JSON
-        data: JSON.stringify({ prompt: prompt }), // Convert data to JSON format
-        success: function (response) {
-            console.log(response); // Handle the response from the server
-            return response;
-        },
-        error: function (xhr, status, error) {
-            console.error(error); // Handle any errors
+        try {
+            const result = await runGemini("What is the general information of aspirin?");
+            if (result != null) {
+                var resultContainer = document.getElementById('result');
+                var paragraph = resultContainer.querySelector('p');
+                
+                var resultWithBreaks = result.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+                resultWithBreaks = resultWithBreaks.replace(/\*\s/g, '&#8226; ');
+                resultContainer.style.display = 'flex';
+                paragraph.innerHTML = resultWithBreaks;
+            }
+        } catch (error) {
+            console.error(error);
+            // Handle errors here
         }
     });
 }

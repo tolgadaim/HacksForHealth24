@@ -21,7 +21,6 @@ app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
 
-
 // Parse URL-encoded bodies (as sent by HTML forms)
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -33,7 +32,7 @@ app.post('/runGemini', (req, res) => {
     // Execute the desired functionality here based on the prompt
     runGemini(prompt)
         .then(text => {
-            const responseText = 'Received prompt: ' + prompt + '. Response: ' + text;
+            const responseText = text;
             res.send(responseText);
         })
         .catch(error => {
@@ -59,5 +58,3 @@ function runGemini(prompt) {
             });
     });
 }
-
-// runGemini("How do I call a node function from a client sided js function?");

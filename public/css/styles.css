@@ -66,30 +66,40 @@ h1 {
         p {
             margin-bottom: 10px;
         }
-    }
-    
-    button {
-        margin-top: 25px;
-        background-color: #4CAF50;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-        transition: all 0.3s ease 0s;
-    }
+    }    
+}
 
-    button:hover {
-        background-color: #45a049;
-    }
+button {
+    margin-top: 25px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease 0s;
+}
+
+button:hover {
+    background-color: #45a049;
 }
 
 #result {
-    margin-top: 20px;
-    text-align: center;
-    color: var(--color-text);
-    font-size: 18px;
+    display: none; /* Hide popup by default */
+    flex-direction: column;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 200px;
+    min-height: 200px;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0px 0px 1px 1000px rgba(0, 0, 0, 0.5);
+    max-height: 80%; /* Limit height of the popup */
+    overflow-y: auto;
 }
 
 /* Responsive styling */
