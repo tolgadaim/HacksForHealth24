@@ -65,26 +65,6 @@ class VisionAI:
         self.client = client
         self.image = image
 
-    def face_detection(self):
-        response = self.client.face_detection(image=self.image)
-        faces = response.face_annotations
-        if faces:
-            results = []
-            for face in faces:
-                results.append(self.Face_Detection(
-                    face.detection_confidence,
-                    face.joy_likelihood.name,
-                    face.sorrow_likelihood.name,
-                    face.anger_likelihood.name,
-                    face.surprise_likelihood.name,
-                    face.under_exposed_likelihood.name,
-                    face.blurred_likelihood.name,
-                    face.headwear_likelihood.name,
-                    face.bounding_poly.vertices
-                ))
-            return results
-        return
-
     def label_detection(self):
         response = self.client.label_detection(image=self.image)
         labels = response.label_annotations
@@ -94,20 +74,6 @@ class VisionAI:
                 results.append(self.Label_Detection(
                     label.description, 
                     float('{0:.2f}'.format(label.score))
-                ))
-            return results
-        return
-
-    def logo_detection(self):
-        response = self.client.logo_detection(image=self.image)
-        logos = response.logo_annotations
-        if logos:
-            results = []
-            for logo in logos:
-                results.append(self.Logo_Detection(
-                    logo.description, 
-                    float('{0:.2f}'.format(logo.score)), 
-                    logo.bounding_poly.vertices
                 ))
             return results
         return
@@ -123,23 +89,6 @@ class VisionAI:
                     float('{0:.2f}'.format(object.score)), 
                     object.bounding_poly.normalized_vertices
                 ))
-            return results
-        return
-
-    def landmark_detection(self):
-        response = self.client.landmark_detection(image=self.image)
-        landmarks = response.landmark_annotations
-        if landmarks:
-            results = []
-            for landmark_annotation in landmarks:
-                results.append(               
-                    self.Landmark_Detection(
-                        landmark_annotation.description,
-                        landmark_annotation.score,
-                        landmark_annotation.bounding_poly.vertices,
-                        landmark_annotation.locations
-                    )
-                )
             return results
         return
 
