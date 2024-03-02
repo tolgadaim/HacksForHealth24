@@ -1,4 +1,6 @@
 window.addEventListener('load', function () {
+    runGemini("Tell me a joke");
+
     document.getElementById('image-upload').addEventListener('change', function(event) {
         var selectedFile = event.target.files[0];
         var imageContainer = document.getElementById('imageContainer');
@@ -39,7 +41,27 @@ function detectMedicine() {
         // You can use JavaScript, a server-side language, or an API for this purpose
         
 
+        // Ask gemini the text:
+        result = runGemini("What is the general information of aspirin?");
+
         // For now, just displaying a placeholder result
         document.getElementById('result').innerHTML = 'Medicine detected: Aspirin';
+    });
+}
+
+function runGemini(prompt) {
+    // Send an AJAX request to the server to execute the runGemini function
+    $.ajax({
+        url: '/runGemini',
+        method: 'POST',
+        contentType: 'application/json', // Set content type to JSON
+        data: JSON.stringify({ prompt: prompt }), // Convert data to JSON format
+        success: function (response) {
+            console.log(response); // Handle the response from the server
+            return response;
+        },
+        error: function (xhr, status, error) {
+            console.error(error); // Handle any errors
+        }
     });
 }
