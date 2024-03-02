@@ -38,6 +38,7 @@ h1 {
     div {
         width: 300px;
         height: 300px;
+        border-radius: 25px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -125,4 +126,67 @@ button:hover {
     #result {
         font-size: 16px;
     }
+}
+/* styles.css */
+
+#howToUsePopup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    max-width: 400px;
+    text-align: center;
+}
+
+#howToUsePopup h2 {
+    color: #333;
+}
+
+#howToUsePopup p {
+    color: #666;
+}
+
+#closePopup {
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-weight: bold;
+}
+.howToUseButton {
+    margin-top: 25px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease 0s;
+}
+
+.howToUseButton:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+.poweredByGoogle {
+    margin-top: 25px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: all 0.3s ease 0s;
+}
+
+.poweredByGoogle p {
+    margin: 0;
+    color: white;
+    font-size: 14px;
 }
