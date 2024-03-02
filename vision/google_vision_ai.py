@@ -27,7 +27,7 @@ def prepare_image_web(url):
         return
 
 def draw_boundary(image_file, vertices, caption=''):
-    font = ImageFont.truetype('C:\Windows\Fonts\OpenSans-Bold', size=35)
+    font = ImageFont.truetype('C:\Windows\Fonts\ARIALNB', size=35)
     pil_image = Image.open(image_file)
     draw = ImageDraw.Draw(pil_image)
     xys = [(vertex.x, vertex.y) for vertex in vertices]
@@ -37,7 +37,7 @@ def draw_boundary(image_file, vertices, caption=''):
     pil_image.show()
 
 def draw_boundary_normalized(image_file, vertices, caption=''):
-    font = ImageFont.truetype('C:\Windows\Fonts\OpenSans-Bold', size=35)
+    font = ImageFont.truetype('C:\Windows\Fonts\ARIALNB', size=35)
     pil_image = Image.open(image_file)
     draw = ImageDraw.Draw(pil_image)
     xys = [(vertex.x * pil_image.size[0], vertex.y * pil_image.size[1]) for vertex in vertices]
