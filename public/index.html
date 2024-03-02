@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicine Detection</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/script.js"></script>
+</head>
+<body>
+    <div class="content">
+        <h1>Medicine Detection</h1>
+
+        <form id="upload-form" action="#" method="post" enctype="multipart/form-data">
+            <input type="file" id="image-upload" name="image" accept="image/*" style="display: none;">
+            <label for="image-upload" id="upload-label">
+                <div id="uploadContainer">
+                    <img src="https://conjointly.com/img/upload-file.png" alt="Upload Image">
+                    <p>Upload an image</p>
+                </div>
+                <div id="imageContainer" style="display: none;">
+                    <p id="imageText">Uploaded Image:</p>
+                    <img id="selectedImage" src="" width="300px" alt="Uploaded Image">
+                </div>
+            </label>
+            
+            <button type="submit" onclick="detectMedicine()">Detect Medicine</button>
+        </form>
+
+        <div id="result">
+            <!-- The result will be displayed here -->
+        </div>
+    </div>
+</body>
+</html>
