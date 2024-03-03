@@ -36,8 +36,10 @@ h1 {
     margin-top: 20px;
 
     div {
+        margin-bottom: 30px;
         width: 300px;
         height: 300px;
+        border-radius: 25px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -57,7 +59,6 @@ h1 {
     }
 
     #imageContainer {
-        margin-top: 40px;
         img {
             object-fit: cover;
             width: 100%;
@@ -66,30 +67,68 @@ h1 {
         p {
             margin-bottom: 10px;
         }
-    }
-    
-    button {
-        margin-top: 25px;
-        background-color: #4CAF50;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-        transition: all 0.3s ease 0s;
-    }
+    }    
+}
 
-    button:hover {
-        background-color: #45a049;
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease 0s;
+}
+
+button:hover {
+    background-color: #45a049;
+    transform: scale(1.05); /* Scale on hover */
+
+}
+
+#loading {
+    display: none;
+    position: fixed;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    align-items: center;
+    justify-content: center;
+    opacity: 50%;
+
+    img {
+        width: 100px;
+        height: 100px;
+        animation: rotate 3s linear infinite;
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
     }
 }
 
 #result {
-    margin-top: 20px;
-    text-align: center;
-    color: var(--color-text);
-    font-size: 18px;
+    display: none; /* Hide popup by default */
+    flex-direction: column;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 200px;
+    min-height: 200px;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0px 0px 1px 1000px rgba(0, 0, 0, 0.5);
+    max-height: 80%; /* Limit height of the popup */
+    overflow-y: auto;
 }
 
 /* Responsive styling */
@@ -109,10 +148,74 @@ h1 {
 
         button {
             font-size: 14px;
+            
         }
     }
 
     #result {
         font-size: 16px;
     }
+}
+/* styles.css */
+
+#howToUsePopup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 1px 1000px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    max-width: 400px;
+    text-align: center;
+}
+
+#howToUsePopup h2 {
+    color: #333;
+}
+
+#howToUsePopup p {
+    color: #666;
+}
+
+#closePopup {
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-weight: bold;
+}
+.howToUseButton {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease 0s;
+}
+
+.howToUseButton:hover {
+    background-color: #45a049; /* Darker green on hover */
+    transform: scale(1.05); /* Scale on hover */
+}
+.poweredByGoogle {
+    margin-top: 25px;
+    background-color: #4c7faf;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: all 0.3s ease 0s;
+}
+
+.poweredByGoogle p {
+    margin: 0;
+    color: white;
+    font-size: 14px;
 }
