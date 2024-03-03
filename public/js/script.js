@@ -47,6 +47,7 @@ async function runGemini(prompt) {
 }
 
 async function runPythonScript(imageUrl) {
+    console.log(imageUrl);
     try {
         const response = await $.ajax({
             url: '/runPythonScript',

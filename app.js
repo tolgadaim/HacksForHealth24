@@ -78,6 +78,8 @@ app.post('/runPythonScript', (req, res) => {
 function runPythonScript(imageUrl) {
     return new Promise((resolve, reject) => {
         const pythonProcess = spawn('python', ['vision/text_detection.py', 'vision/google_vision_ai.py', 'vision/detect_medicine.py']);
+        let output ='';
+        console.log(imageUrl);
 
         pythonProcess.stdout.on('data', (data) => {
             // Append the output received from the Python script to the 'output' variable
