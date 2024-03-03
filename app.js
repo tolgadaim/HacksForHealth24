@@ -62,9 +62,9 @@ function runGemini(prompt) {
 }
 
 app.post('/runPythonScript', (req, res) => {
-    const prompt = req.body.prompt; // Assuming you're using body-parser middleware for parsing request bodies
+    const imageUrl = req.body; // Assuming you're using body-parser middleware for parsing request bodies
     // Execute the desired functionality here based on the prompt
-    runPythonScript()
+    runPythonScript(imageUrl)
         .then(text => {
             const responseText = text;
             res.send(responseText);
@@ -75,27 +75,23 @@ app.post('/runPythonScript', (req, res) => {
         });
 });
 
-function runPythonScript() {
-    const pythonProcess = spawn('python', ['vision/text_detection.py', 'vision/google_vision_ai.py', 'vision/detect_medicine.py']);
-    let output = '';
+function runPythonScript(imageUrl) {
+    return new Promise((resolve, reject) => {
+        const pythonProcess = spawn('python', ['vision/text_detection.py', 'vision/google_vision_ai.py', 'vision/detect_medicine.py']);
 
+        pythonProcess.stdout.on('data', (data) => {
+            // Append the output received from the Python script to the 'output' variable
+            output += data.toString();
+        });
 
+        pythonProcess.on('close', (code) => {
+            console.log(output);
+            resolve(output); // Resolve with the output from the Python script
+        });
 
-
-    pythonProcess.stdout.on('data', (data) => {
-        // Append the output received from the Python script to the 'output' variable
-        output += data.toString();
-    });
-
-
-    pythonProcess.stderr.on('data', (data) => {
-        console.error(`Python script stderr: ${data}`);
-    });
-
-
-    pythonProcess.on('close', (code) => {
-        console.log(`Python script child process exited with code ${code}`);
-        // Log or process the accumulated output here
-        console.log('Output:', output);
+        pythonProcess.on('error', (error) => {
+            console.error('Error executing Python script:', error);
+            reject(error); // Reject the promise if an error occurs
+        });
     });
 }
