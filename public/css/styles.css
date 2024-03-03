@@ -49,6 +49,12 @@ body {
     width: clamp(600px, 60vw, 750px);
     font-family: 'Helvetica', sans-serif;
     overflow-y: auto;
+    #content-bg {
+        font-size: 400px;
+        position: fixed;
+        z-index: -1;
+        opacity: 0.15;
+    }
 }
 
 h1 {
@@ -157,7 +163,7 @@ button:hover {
     position: fixed;
     top: 50%;
     left: 50%;
-    min-width: 200px;
+    width: clamp(600px, 70vw, 1000px);
     min-height: 200px;
     transform: translate(-50%, -50%);
     background-color: #fff;
@@ -175,17 +181,6 @@ button:hover {
     }
 }
 
-/* Responsive styling */
-@media only screen and (max-width: 700px) {
-    .content {
-        width: 100%;
-        border: 0;
-        margin-inline: 0;
-        transition: all 0.3s ease 0s;
-    }
-}
-/* styles.css */
-
 #howToUsePopup {
     display: none;
     position: fixed;
@@ -197,7 +192,7 @@ button:hover {
     border-radius: 10px;
     box-shadow: 0px 0px 1px 1000px rgba(0, 0, 0, 0.5);
     z-index: 1000;
-    max-width: 400px;
+    width: clamp(300px, 40vw, 400px);
     text-align: center;
 }
 
@@ -242,4 +237,19 @@ button:hover {
     margin: 0;
     color: white;
     font-size: 14px;
+}
+
+/* Responsive styling */
+@media only screen and (max-width: 700px) {
+    .content {
+        width: 100%;
+        border: 0;
+        margin-inline: 0;
+        transition: all 0.3s ease 0s;
+    }
+
+    #result {
+        width: math(100% - 20px);
+        transition: all 0.3s ease 0s;
+    }
 }
