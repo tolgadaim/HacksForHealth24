@@ -61,6 +61,20 @@ function runGemini(prompt) {
     });
 }
 
+app.post('/runPythonScript', (req, res) => {
+    const prompt = req.body.prompt; // Assuming you're using body-parser middleware for parsing request bodies
+    // Execute the desired functionality here based on the prompt
+    runPythonScript()
+        .then(text => {
+            const responseText = text;
+            res.send(responseText);
+        })
+        .catch(error => {
+            console.error(error);
+            res.status(500).send('Error processing request');
+        });
+});
+
 function runPythonScript() {
     const pythonProcess = spawn('python', ['vision/text_detection.py', 'vision/google_vision_ai.py', 'vision/detect_medicine.py']);
     let output = '';
@@ -85,6 +99,3 @@ function runPythonScript() {
         console.log('Output:', output);
     });
 }
-
-
-runPythonScript();
