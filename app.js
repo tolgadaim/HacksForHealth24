@@ -2,6 +2,8 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const app = express();
+const { spawn } = require('child_process');
+
 
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const Your_API_Key = "AIzaSyC6pDhC9uWmaR66-88s5u0j-fn1f7HA3Tg"
@@ -56,5 +58,44 @@ function runGemini(prompt) {
                 console.error(error);
                 reject(error);
             });
+    });
+}
+
+app.post('/runPythonScript', (req, res) => {
+    const prompt = req.body.prompt; // Assuming you're using body-parser middleware for parsing request bodies
+    // Execute the desired functionality here based on the prompt
+    runPythonScript()
+        .then(text => {
+            const responseText = text;
+            res.send(responseText);
+        })
+        .catch(error => {
+            console.error(error);
+            res.status(500).send('Error processing request');
+        });
+});
+
+function runPythonScript() {
+    const pythonProcess = spawn('python', ['vision/text_detection.py', 'vision/google_vision_ai.py', 'vision/detect_medicine.py']);
+    let output = '';
+
+
+
+
+    pythonProcess.stdout.on('data', (data) => {
+        // Append the output received from the Python script to the 'output' variable
+        output += data.toString();
+    });
+
+
+    pythonProcess.stderr.on('data', (data) => {
+        console.error(`Python script stderr: ${data}`);
+    });
+
+
+    pythonProcess.on('close', (code) => {
+        console.log(`Python script child process exited with code ${code}`);
+        // Log or process the accumulated output here
+        console.log('Output:', output);
     });
 }

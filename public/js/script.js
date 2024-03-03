@@ -56,6 +56,7 @@ async function detectMedicine() {
             return;
         }
 
+        var formData = new FormData();
         // Perform image detection or processing here
         // You can use JavaScript, a server-side language, or an API for this purpose
 
@@ -80,4 +81,10 @@ async function detectMedicine() {
             // Handle errors here
         }
     });
+}
+
+// Function to handle the detected medicine
+function handleMedicineDetection(medicine) {
+  // Update UI with detected medicine
+  document.getElementById('result').innerHTML = 'Medicine detected: ' + medicine;
 }
