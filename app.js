@@ -62,7 +62,7 @@ function runGemini(prompt) {
 }
 
 app.post('/runPythonScript', (req, res) => {
-    const imageUrl = req.body; // Assuming you're using body-parser middleware for parsing request bodies
+    const imageUrl = req.body.imageUrl; // Assuming you're using body-parser middleware for parsing request bodies
     // Execute the desired functionality here based on the prompt
     runPythonScript(imageUrl)
         .then(text => {
@@ -77,9 +77,8 @@ app.post('/runPythonScript', (req, res) => {
 
 function runPythonScript(imageUrl) {
     return new Promise((resolve, reject) => {
-        const pythonProcess = spawn('python', ['vision/text_detection.py', 'vision/google_vision_ai.py', 'vision/detect_medicine.py']);
+        const pythonProcess = spawn('python', ['vision/text_detection.py', imageUrl]);
         let output ='';
-        console.log(imageUrl);
 
         pythonProcess.stdout.on('data', (data) => {
             // Append the output received from the Python script to the 'output' variable
@@ -97,3 +96,11 @@ function runPythonScript(imageUrl) {
         });
     });
 }
+
+// const imageUrl = "image_67145473.JPG";
+// runPythonScript(imageUrl)
+//     .then(output => {
+//         console.log("Process completed successfully. Output:", output);    })
+//     .catch(error => {
+//         console.log("Process no successfully. Output:", output); 
+// });

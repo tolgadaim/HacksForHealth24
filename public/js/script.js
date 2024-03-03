@@ -1,3 +1,5 @@
+var FileUrl = "";
+
 window.addEventListener('load', function () {
     document.getElementById('image-upload').addEventListener('change', function(event) {
         var selectedFile = event.target.files[0];
@@ -14,6 +16,7 @@ window.addEventListener('load', function () {
             imageContainer.style.display = 'flex';
           };
       
+          FileUrl = selectedFile;
           reader.readAsDataURL(selectedFile);
           imageText.innerText = 'Uploaded Image:';
         } else {
@@ -52,7 +55,8 @@ async function runPythonScript(imageUrl) {
         const response = await $.ajax({
             url: '/runPythonScript',
             method: 'POST',
-            body: imageUrl
+            contentType: 'application/json',
+            data: JSON.stringify({ imageUrl: imageUrl })
         });
         console.log(response); // Handle the response from the server
         return response;
@@ -81,7 +85,7 @@ async function detectMedicine() {
         // Perform image detection or processing here
         // You can use JavaScript, a server-side language, or an API for this purpose
         try {
-            drugName = await runPythonScript(imageSource);
+            drugName = await runPythonScript(FileUrl.name);
         } catch (error) {
             console.error(error);
             loadingScreen.style.display = 'none';
@@ -89,8 +93,12 @@ async function detectMedicine() {
             return;
         }
 
-        if (drugName == "") {
+        var resultContainer = document.getElementById('result');
+        var paragraph = resultContainer.querySelector('p');
+        if (drugName.trim() == "") {
             loadingScreen.style.display = 'none';
+            paragraph.innerHTML = "Cannot find drug in image.";
+            resultContainer.style.display = 'flex';
             return;
         }
 
@@ -101,8 +109,6 @@ async function detectMedicine() {
             const result = await runGemini(promptText);
             loadingScreen.style.display = 'none';
             if (result != null) {
-                var resultContainer = document.getElementById('result');
-                var paragraph = resultContainer.querySelector('p');
                 
                 var resultWithBreaks = result.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
                 resultWithBreaks = resultWithBreaks.replace(/\*\s/g, '&#8226; ');
