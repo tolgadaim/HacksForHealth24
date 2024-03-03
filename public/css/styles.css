@@ -8,15 +8,37 @@
 body {
     margin: 0;
     padding: 0;
+    display: flex;
+    justify-content: center;
     background-color: var(--color-primary);
     background-color: #345283;
+}
 
+#scroll-bg{
+    display: grid;
+    place-items: center;
+    grid-template-columns: 1fr 1fr;
+    pointer-events: none;
+    user-select: none;
+    position: fixed;
+    line-height: 1.5;
+    height: 100vh;
+    width: 100vw;
+    font-size: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: left;
+    opacity: .2;
+    img{
+        padding: 0;
+        margin: 0;
+    }
 }
 
 .content {
     background-color: #abc4ed;
     border-inline: 6px solid #4287f5;
-    margin-inline: 20vw;
+    box-shadow: 0 0 30px 2px rgba(0, 0, 0, 0.3);
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -24,18 +46,26 @@ body {
     justify-content: center;
     text-align: center;
     height: 100%;
-    width: 60vw;
+    width: clamp(600px, 60vw, 750px);
     font-family: 'Helvetica', sans-serif;
+    overflow-y: auto;
+    #content-bg {
+        font-size: 400px;
+        position: fixed;
+        z-index: -1;
+        opacity: 0.15;
+    }
 }
 
 h1 {
     text-align: center;
     color: var(--color-text);
+    margin: 15px 0 15px 0;
     font-size: 48px;
-        font-family: "Montserrat", sans-serif;
-        font-optical-sizing: auto;
-        font-weight: 600;
-        font-style: normal;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
 
 }
 
@@ -45,8 +75,8 @@ h1 {
 
     div {
         margin-bottom: 30px;
-        width: 300px;
-        height: 300px;
+        width: 250px;
+        height: 250px;
         border-radius: 25px;
         display: flex;
         flex-direction: column;
@@ -69,10 +99,14 @@ h1 {
     }
 
     #imageContainer {
+
         img {
+            border-radius: 25px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
             object-fit: cover;
             width: 100%;
             height: 100%;
+            background-color: var(--color-container);
         }
         p {
             margin-bottom: 10px;
@@ -93,8 +127,7 @@ button {
 
 button:hover {
     background-color: #45a049;
-    transform: scale(1.05); /* Scale on hover */
-
+    transform: scale(1.02); /* Scale on hover */
 }
 
 #loading {
@@ -130,7 +163,7 @@ button:hover {
     position: fixed;
     top: 50%;
     left: 50%;
-    min-width: 200px;
+    width: clamp(600px, 70vw, 1000px);
     min-height: 200px;
     transform: translate(-50%, -50%);
     background-color: #fff;
@@ -138,35 +171,15 @@ button:hover {
     border: 1px solid #ccc;
     box-shadow: 0px 0px 1px 1000px rgba(0, 0, 0, 0.5);
     max-height: 80%; /* Limit height of the popup */
-    overflow-y: auto;
-}
-
-/* Responsive styling */
-@media only screen and (max-width: 600px) {
-    h1 {
-        font-size: 24px;
+    button {
+        position: sticky;
+        top: 0;
     }
-
-    #upload-form {
-        margin-top: 10px;
-
-        #image-upload {
-            font-size: 14px;
-            width: 80%;
-            box-sizing: border-box;
-        }
-
-        button {
-            font-size: 14px;
-            
-        }
-    }
-
-    #result {
-        font-size: 16px;
+    p {
+        width: 100%;
+        overflow-y: auto;
     }
 }
-/* styles.css */
 
 #howToUsePopup {
     display: none;
@@ -179,7 +192,7 @@ button:hover {
     border-radius: 10px;
     box-shadow: 0px 0px 1px 1000px rgba(0, 0, 0, 0.5);
     z-index: 1000;
-    max-width: 400px;
+    width: clamp(300px, 40vw, 400px);
     text-align: center;
 }
 
@@ -209,12 +222,8 @@ button:hover {
     transition: all 0.3s ease 0s;
 }
 
-.howToUseButton:hover {
-    background-color: #45a049; /* Darker green on hover */
-    transform: scale(1.05); /* Scale on hover */
-}
 .poweredByGoogle {
-    margin-top: 25px;
+    margin: 25px 0px 15px 0px;
     background-color: #4c7faf;
     color: white;
     padding: 10px 20px;
@@ -228,4 +237,19 @@ button:hover {
     margin: 0;
     color: white;
     font-size: 14px;
+}
+
+/* Responsive styling */
+@media only screen and (max-width: 700px) {
+    .content {
+        width: 100%;
+        border: 0;
+        margin-inline: 0;
+        transition: all 0.3s ease 0s;
+    }
+
+    #result {
+        width: math(100% - 20px);
+        transition: all 0.3s ease 0s;
+    }
 }
