@@ -1,0 +1,11 @@
+# https://github.com/github/gitignore/blob/main/Node.gitignore
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Compiled binary
+build/
+
+# Dependency directories
+node_modules/
